@@ -19,3 +19,24 @@ Real browser at 320/390/768/1440px: horizontal document overflow 0; broken image
 Intentional differences are university text, ribbon palette, campus drawing and the small campus-size adaptation to protect captions. No numerical fidelity score claimed.
 
 Publishing: main /docs. QA screenshots, source photographs and original generated masters are not included in the production build.
+
+
+---
+
+# Nihon ribbon concept 3
+
+final result: passed
+
+Reference: selected third generated concept, exec-b6de90e5-979d-4500-b309-d3549e948a0c.png. Ribbon component is the fidelity target; surrounding existing page layout is preserved.
+
+Implementation: curved ribbon with folded tails, white native SVG text on a common textPath, university name 60 and suffix 42 in SVG units. Existing university palette and local font retained. Accessible text is exposed once outside the decorative SVG.
+
+Comparison: selected-ribbon-reference.png compared with refined-390.png and refined-1440.png. Same arch, university/suffix hierarchy, folded tails and white seam treatment. Existing flat fill retained rather than generated image shading. No numerical fidelity score claimed.
+
+Round 1: extra seam triangles and cramped word spacing. Fixed seam path and added 6 SVG units of spacing; recaptured and inspected.
+
+Final browser checks: 320/390/768/1440 CSS px, horizontal overflow 0 at every width. Ribbon lettering contained and heading separated. Campus image loaded. All three external LINE URLs preserved. Mobile menu opens; LINE section link reaches #register and closes menu. Browser error log empty. Vite production build succeeded.
+
+Evidence: refined-{320,390,768,1440}.png and responsive.json, stored locally in this QA folder. Screenshots and reference artwork are excluded from production docs.
+
+Scope: Nihon ribbon only. Existing hero headline, campus, bubbles, lower content and LINE destination retained.
