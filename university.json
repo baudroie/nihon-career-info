@@ -1,0 +1,10 @@
+{
+  "slug": "nihon",
+  "name": "日本大学",
+  "short": "日大",
+  "campus": "文理学部キャンパス",
+  "building": "文理学部本館",
+  "color": "#b62a40",
+  "repository": "baudroie/nihon-career-info",
+  "url": "https://baudroie.github.io/nihon-career-info/"
+}

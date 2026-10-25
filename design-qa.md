@@ -1,126 +1,21 @@
-# Blue university audience ribbon - 2026-10-25
+# 日本大学 responsive QA
 
 final result: passed
 
-Reference: ../generated_images/exec-18f6c2e9-0c15-4623-8790-1c6c313dfe85.png
-Previous public commit: a6e71ee1641c14491de7da13bfa6f13c44002e3e
+Source truth: approved Aoyama public build 50bd52652a8fe76b131ad3096a74d4ebd53a51f6, captured at 1440x1058 and 390x1120 CSS px, density 1. Reference images: aogaku-career-info/qa/audience-ribbon/published-desktop-1440.png and published-mobile-390.png in the parent workspace.
 
-## Implementation and comparison
-Native SVG ribbon face, tails, folds and white seams; live HTML university name with smaller eligibility suffix. Existing orange rays moved to the upper-right of the left IT bubble. Hero height and spacing follow the approved reference. Existing glyph transforms, illustrations, lower sections and LINE URL preserved. No JavaScript or animation added.
+Implementation captures: university-lp-batch/qa/nihon-{320,390,768,1440}.png. Combined comparisons: desktop-board-1/2.jpg and mobile-board-1/2.jpg. Each board includes the source in the same image; desktop panels are uniformly scaled to 720px. Native captures retained for focused review. UI state: hero after load; existing initial underline animation retained.
 
-Approved reference normalized proportionally to 1440px, compared beside a 1440px browser capture: qa/audience-ribbon/reference-comparison-1440.png. Before/after: before-after-1440.png. First comparison led to larger university text, adjusted headline spacing, and lower rays. Reviewed typography, spacing, palette, image quality and content. Passed refers to the selected composition and responsive quality; generated illustration details and font outlines are not a claim of numerical pixel equality.
+## Required fidelity surfaces
+- Typography: original live headline and all glyph transforms unchanged. Supplementary local Noto subsets cover university kanji; CampusNote covers each campus caption. Ribbon stays on one line at all widths.
+- Layout: existing header, hero, bubbles, students, lower content and closing CTA retained. Taller campus asset overlapped the caption in initial Toyo capture. Corrected new campus image scale to .88 at its baseline and moved caption to top:0; captured and compared again. Aoyama retains original campus size.
+- Color: only ribbon face/tails/folds changed to the university-specific LP palette. White label contrast preserved; other colors unchanged.
+- Image quality: new 1536x1024 transparent campus illustration (Aoyama reuses original 1400x933) in the same black-line/orange-tree style. White building/student interiors retained. No blank rectangle on the cream page. Campus labels are native text.
+- Copy: university name, eligibility, event copy, alt text, title, description, canonical and social URL changed consistently. Existing shared LINE destination retained; no university-specific tracking URL was invented.
 
-## Browser verification
-- 320 / 390 / 768 / 1024 / 1280 / 1440px: document horizontal overflow 0px; broken images 0.
-- 320 / 390px: university label stays on one line; existing three-line headline; no clipping or overlap with bubbles, campus, students or body copy. University text is 20px / 22.23px respectively.
-- Captures at 768 / 1024 / 1440px reviewed for label, headline and bubble placement.
-- Mobile menu opens; event link navigates to #events and closes menu. Sticky header stays at top=0 after scroll.
-- Keyboard Tab navigation and visible blue 3px link focus ring confirmed. All three CTAs retain the existing LINE URL and separate-tab target. No registration submitted.
-- Local fixture with scripts removed keeps ribbon, copy, images and buttons visible. Forced reduced-motion CSS and JS branch: all data-motion elements animation:none, no hidden motion targets. OS settings were not changed.
-- Build passed; all four existing packaging tests passed.
+## Verification
+Real browser at 320/390/768/1440px: horizontal document overflow 0; broken images 0. Menu opens, LINE section link closes it and changes hash to #register. Sticky header top=0. All three external CTA URLs preserved. No form submitted. Browser error log empty. All ten builds succeeded; existing packaging smoke tests passed (4/4). Shared JS and motion code are byte-identical to the accepted base. No additional animation added.
 
-Changed: index.html / src/styles.css / AGENTS.md / design-qa.md / docs production build.
-Do not publish reference images, QA captures or local test HTML.
+Intentional differences are university text, ribbon palette, campus drawing and the small campus-size adaptation to protect captions. No numerical fidelity score claimed.
 
----
-Previous QA history:
-
-# CTA案3の実装確認 — 2026-10-25
-
-結果: 選択された構成を実装し、レスポンシブ表示・操作を確認。
-基準画像: ../generated_images/exec-5084d3fe-2d4a-42cc-8b01-67a41a54aa07.png
-基準コミット: 40fe3a557bf0234411651267e96ddca8ca21a6da
-
-## 変更
-黒背景と曲面の境界、クリーム色の吹き出し、LINEだけオレンジの2行見出し、情報配信のメリット、黒文字のオレンジCTA、3種類の情報が届くスマホと学生を実装。文字・スマホ・吹き出し・アイコンはHTML/CSS/SVG。学生のみ1145×1374pxの透過WebP（142,038 bytes）。既存34個のdisplay-glyphの内容とinline styleが変更前と完全に同じであることを確認。
-人物は初回のみ500msで下8pxから登場（800px以下は4px）。既存IntersectionObserverと非表示・画面外の停止処理を再利用。本文・ボタンは最初から表示。
-
-## 実ブラウザーの確認
-- 320 / 390 / 768 / 1440px: 横スクロール0px、画像読み込みエラー0。人物とメッセージの重なりをスマホで発見し、人物を縮小・右寄せして解消。
-- 完成状態と、登場アニメーション250ms地点を固定したローカル検証ページで確認。途中位置はPC4px、スマホ2px。文字は動かない。
-- スマホメニューの開閉、LINEのページ内リンクへの移動、移動後のメニュー閉鎖を確認。スクロール後もヘッダーtop=0、stickyを維持。
-- CTAのキーボードフォーカスは白3pxの外枠。既存のLINE URLと別タブ指定を保持。登録送信は実行していない。
-- JavaScriptを除いたローカルページで画像・文章・ボタンが表示。reduced-motionのCSSとJS分岐をローカルページで強制し、animation:none、opacity:1を確認（OS設定自体は変更していない）。
-- ブラウザーコンソールエラー0。ビルド成功、既存パッケージングテスト4件成功。
-
-1280pxの公開確認で人物がメッセージに重なる箇所を発見。PCの人物の最大高を画面幅に連動させ、1024 / 1280pxでもメッセージが隠れないことを再確認。1440pxおよび800px以下の指定は維持。
-
-## 比較と範囲
-同じ1440pxで変更前・変更後を撮影し、qa/cta-selected/before-after-1440.pngに並べて比較。選択案との比較はconcept-comparison-1440.png。各幅のキャプチャと途中状態のmetrics.jsonも同フォルダーに保存。
-見出しの強弱、情報配信の説明、スマホと人物の構図、曲面を反映。学生の細部やアイコンの輪郭は生成案と同一ではない。スマホ版は文字を読める大きさで縦に配置。数値による再現率は主張しない。
-比較資料・マスター・qa用HTMLは公開ビルドへ含めない。
-
-変更ファイル: index.html / src/styles.css / src/cta.css / public/assets/cta-student.webp / AGENTS.md / design-qa.md / docs公開ビルド。
-
----
-以下は前回までの確認記録（旧CTAに関する記述は今回の選択案で更新）。
-
-# 下部セクションのマスターデザイン復元
-
-確認日: 2026-10-24（日本時間）
-final result: passed
-
-## 対象と範囲
-添付された3ステップの現状スクリーンショットを起点に、情報紹介・登録の3ステップ・下部CTAを修正。
-元コミット: f9923adbd1fff41a8488a8ce916e44752096a719。
-Heroの選択済み吹き出し案、人物・校舎、ヘッダー、LINE遷移先は維持。
-
-マスター（親ワークスペース）:
-- generated_images/exec-5c1628a2-673b-474f-9eb7-342d9f7cbab6.png（934×1685px）
-- generated_images/exec-ed96bf80-79c3-4bb5-b1ec-dc4606dfcc9b.png（819×1920px）
-指摘画像: ../aogaku-reference-check/current-steps.png（1814×428px）
-
-## 比較方法
-実ブラウザーのCSS幅1440 / 390pxでページをキャプチャし、情報紹介の開始位置で切り出した。
-マスターを同じ横幅へ等比拡縮し、横並びにして文字組み・密度・装飾を比較。
-画像生成マスターはCSS viewportやDPR情報を持たないため、画面幅を基準とした比較であり、ピクセル一致率の測定ではない。
-実装キャプチャはCSS幅と画像幅が一致する1倍の画像。
-
-比較証跡:
-- qa/lower-fidelity/comparison-1440.png
-- qa/lower-fidelity/comparison-390.png
-- qa/lower-fidelity/after-{320,390,768,1440}.png
-- qa/lower-fidelity/lower-{390,1440}.png
-- qa/lower-fidelity/metrics.json
-対象は通常表示・メニューを閉じた状態。3ステップとCTAは比較画像の下部を拡大して確認。
-
-## 比較履歴と修正
-1. P1: 3ステップにマスターにない番号があり、文字が細く、下線・装飾が欠落。
-   番号を削除。HTMLの手描きフォントを太くし、黄色の二重線・曲線矢印・オレンジの3本線をSVGで実装。横並び／縦並びを各幅で確認。
-2. P1: 情報欄の番号・見出しが小さく、視覚的な強弱が不足。
-   番号、見出し、イラストの比率を拡大。見出しのオレンジ線を折り返しのある描線に変更。不要な英語ラベルを撤去。
-3. P2: セミナーのテーマ例が単なる区切り線と本文になっていた。
-   マスター同様の白い丸い囲みとオレンジの電球アイコンを復元。
-4. P1: CTAのタイトルが小さく、注記の黄色い帯・下線・曲面の構成が異なった。
-   タイトルとボタンの比率、注記、下線、曲面を調整。既存の一文字ごとの静的transformは保持。
-5. P2: 第1回の修正ではスマホの情報欄とステップの上下余白が過大。
-   行高・画像行・余白を圧縮。最小幅で人物に本文が重なる箇所を発見し、本文幅と画像のグリッド行を分離して解消。
-   320pxでイベント本文右端174.16px、人物画像左端179.83px。文字と人物は重ならない。
-6. P2: 縦並び矢印が次のラベルに近すぎた。
-   スマホ用に矢印を短くし、矢印のための間隔を確保。
-
-## 必須5項目
-- 文字: 見出し・番号・ステップ・CTAはHTML。Noto / Yomogiのローカルフォント。ウェイト・字間・改行・手描き文字の線幅を調整し、文字領域に見切れなし。
-- 余白: 大きな番号、本文、右側イラストのPCグリッドを復元。スマホは人物との重なり回避と可読性のため専用配置と高さを使用。
-- 配色: オレンジ、黒、黄色の描線と帯、イベント欄の薄いクリーム、白いテーマ枠を復元。
-- 画質: 文字や単純装飾を画像化しない。既存の高解像度イラストは継続使用し、SVGは拡大可能。
-- 内容: 情報紹介・3ステップ・CTAの意味とLINE URLを維持。元の短い公開本文を保持しており、マスター画像内の長い説明への差し替えはしていない。
-
-## 実ブラウザー確認
-ChatGPT内ブラウザーで320 / 390 / 768 / 1440pxを確認。
-全幅で横スクロール0、文字の見切れ0、画像読み込み失敗0。
-装飾が見出し枠外へ出ることを文字の見切れと誤判定しないよう、文字と装飾を分けて確認。
-スマホメニューが開閉し、イベントリンクの選択で#eventsへ移動し閉じる。スクロール後もヘッダー上端0px。
-3つのCTAが従来のLINE URLを保持。外部登録の送信は行っていない。
-ブラウザーコンソールエラー0。
-JSを除去したローカル検証ページ、reduced-motionのCSS/JS分岐を強制したローカル検証ページで全ステップとCTA本文が表示。OS設定は変更していない。
-build成功。既存パッケージングテスト4件成功。新たなJavaScriptやアニメーションは追加していない。
-
-## 範囲上の留意点
-今回のpassedは、下部の構成・装飾の復元とレスポンシブ品質に対する判定。
-イラストは先に承認された高解像度素材を継続使用しており、画像生成マスターと人物の細部は異なる。
-手書きの各文字をフォントへ置き換えているため完全な輪郭一致ではない。特にスマホは、文字の読みやすさと操作領域を優先してマスターを単純縮小した場合より縦に長い。
-98%以上の再現率や完全一致は主張しない。
-
-変更: index.html / src/styles.css / public/assets/lightbulb.svg / AGENTS.md / design-qa.md / docs公開ビルド。
-比較用画像、元マスター、検証用HTMLは公開しない。
+Publishing: main /docs. QA screenshots, source photographs and original generated masters are not included in the production build.
